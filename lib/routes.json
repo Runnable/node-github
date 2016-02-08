@@ -43,7 +43,8 @@
                 "required": true,
                 "validation": "",
                 "invalidmsg": "",
-                "description": ""
+                "description": "",
+                "testValue": "kaizensoze"
             },
             "org": {
                 "type": "String",
@@ -57,7 +58,8 @@
                 "required": true,
                 "validation": "",
                 "invalidmsg": "",
-                "description": ""
+                "description": "",
+                "testValue": "node-github"
             },
             "branch": {
                 "type": "String",
@@ -362,7 +364,8 @@
                 "validation": "",
                 "invalidmsg": "",
                 "description": "Search Term",
-                "combined": true
+                "combined": true,
+                "testValue": "bazinga"
             },
             "data": {
                 "type": "String",
@@ -4646,21 +4649,6 @@
                 "$per_page": null
             },
             "description": "Search users."
-        },
-
-        "email": {
-            "url": "/legacy/user/email/:email",
-            "method": "GET",
-            "params": {
-                "email": {
-                    "type": "String",
-                    "required": true,
-                    "validation": "",
-                    "invalidmsg": "",
-                    "description": "The email address"
-                }
-            },
-            "description": "Search against public email addresses."
         }
     },
 

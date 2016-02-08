@@ -3506,17 +3506,6 @@ github.search.code({ ... });
  */
 
 /**
- * @api {get} /legacy/user/email/:email email
- * @apiName email
- * @apiDescription Search against public email addresses.
- * @apiGroup search
- *
- * @apiParam {String} email  The email address
- * @apiExample {js} ex:
-github.search.email({ ... });
- */
-
-/**
  * @api {get} /search/issues issues
  * @apiName issues
  * @apiDescription Search issues.

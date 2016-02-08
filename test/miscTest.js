@@ -9,13 +9,12 @@
 
 "use strict";
 
-var Assert = require("assert");
 var Client = require("./../lib/index");
-var testAuth = require("./../test_auth.json");
+var nock = require('nock')
 
 describe("[misc]", function() {
     var client;
-    var token = testAuth["token"];
+    var token = "my test token";
 
     beforeEach(function() {
         client = new Client();
@@ -26,125 +25,154 @@ describe("[misc]", function() {
     });
 
     it("should successfully execute GET /emojis (getEmojis)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/emojis')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.misc.getEmojis(
-            {},
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
-            }
+            {}
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gitignore/templates/:name (getGitignoreTemplate)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gitignore/templates/:name')
+            .query({ access_token: token })
+            .query({ name: "undefined" })
+            .reply();
         client.misc.getGitignoreTemplate(
             {
-                name: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gitignore/templates (getGitignoreTemplates)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gitignore/templates')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.misc.getGitignoreTemplates(
-            {},
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
-            }
+            {}
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /licenses/:license (getLicense)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/licenses/:license')
+            .query({ access_token: token })
+            .query({ license: "undefined" })
+            .reply();
         client.misc.getLicense(
             {
-                license: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                license: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /licenses (getLicenses)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/licenses')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.misc.getLicenses(
-            {},
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
-            }
+            {}
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /meta (getMeta)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/meta')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.misc.getMeta(
-            {},
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
-            }
+            {}
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /rate_limit (getRateLimit)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/rate_limit')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.misc.getRateLimit(
-            {},
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
-            }
+            {}
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/license (getRepoLicense)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/license')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.misc.getRepoLicense(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /markdown (renderMarkdown)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/markdown')
+            .query({ access_token: token })
+            .query({ text: "undefined" })
+            .reply();
         client.misc.renderMarkdown(
             {
-                text: "String",
-                mode: "String",
-                context: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                text: "undefined"
             }
         );
+        expected.done();
+        next();
     });
 
+
     it("should successfully execute POST /markdown/raw (renderMarkdownRaw)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/markdown/raw')
+            .query({ access_token: token })
+            .query({ data: "undefined" })
+            .reply();
         client.misc.renderMarkdownRaw(
             {
-                data: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                data: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 });

@@ -9,13 +9,12 @@
 
 "use strict";
 
-var Assert = require("assert");
 var Client = require("./../lib/index");
-var testAuth = require("./../test_auth.json");
+var nock = require('nock')
 
 describe("[issues]", function() {
     var client;
-    var token = testAuth["token"];
+    var token = "my test token";
 
     beforeEach(function() {
         client = new Client();
@@ -26,574 +25,674 @@ describe("[issues]", function() {
     });
 
     it("should successfully execute POST /repos/:user/:repo/issues/:number/labels (addLabels)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/issues/:number/labels')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined",
+    body: "undefined" })
+            .reply();
         client.issues.addLabels(
             {
-                user: "String",
-                repo: "String",
-                number: "Number",
-                body: "Array"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined",
+                body: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/assignees/:assignee (checkAssignee)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/assignees/:assignee')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    assignee: "undefined" })
+            .reply();
         client.issues.checkAssignee(
             {
-                user: "String",
-                repo: "String",
-                assignee: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                assignee: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/issues (create)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/issues')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    title: "undefined" })
+            .reply();
         client.issues.create(
             {
-                user: "String",
-                repo: "String",
-                title: "String",
-                body: "String",
-                assignee: "String",
-                milestone: "Number",
-                labels: "Json"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                title: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/issues/:number/comments (createComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/issues/:number/comments')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined",
+    body: "undefined" })
+            .reply();
         client.issues.createComment(
             {
-                user: "String",
-                repo: "String",
-                number: "Number",
-                body: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined",
+                body: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/labels (createLabel)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/labels')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    name: "undefined",
+    color: "undefined" })
+            .reply();
         client.issues.createLabel(
             {
-                user: "String",
-                repo: "String",
-                name: "String",
-                color: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                name: "undefined",
+                color: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/milestones (createMilestone)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/milestones')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    title: "undefined" })
+            .reply();
         client.issues.createMilestone(
             {
-                user: "String",
-                repo: "String",
-                title: "String",
-                state: "String",
-                description: "String",
-                due_on: "Date"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                title: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/issues/comments/:id (deleteComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/issues/comments/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.issues.deleteComment(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/labels/:name (deleteLabel)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/labels/:name')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    name: "undefined" })
+            .reply();
         client.issues.deleteLabel(
             {
-                user: "String",
-                repo: "String",
-                name: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/milestones/:number (deleteMilestone)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/milestones/:number')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined" })
+            .reply();
         client.issues.deleteMilestone(
             {
-                user: "String",
-                repo: "String",
-                number: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /repos/:user/:repo/issues/:number (edit)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo/issues/:number')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined" })
+            .reply();
         client.issues.edit(
             {
-                user: "String",
-                repo: "String",
-                number: "Number",
-                title: "String",
-                body: "String",
-                assignee: "String",
-                milestone: "Number",
-                labels: "Json",
-                state: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /repos/:user/:repo/issues/comments/:id (editComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo/issues/comments/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined",
+    body: "undefined" })
+            .reply();
         client.issues.editComment(
             {
-                user: "String",
-                repo: "String",
-                id: "String",
-                body: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined",
+                body: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/issues/:number (get)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/issues/:number')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined" })
+            .reply();
         client.issues.get(
             {
-                user: "String",
-                repo: "String",
-                number: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /issues (getAll)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/issues')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.issues.getAll(
             {
-                filter: "String",
-                state: "String",
-                labels: "String",
-                sort: "String",
-                direction: "String",
-                since: "Date",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/assignees (getAssignees)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/assignees')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.issues.getAssignees(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/issues/comments/:id (getComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/issues/comments/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.issues.getComment(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/issues/:number/comments (getComments)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/issues/:number/comments')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined" })
+            .reply();
         client.issues.getComments(
             {
-                user: "String",
-                repo: "String",
-                number: "Number",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/issues/comments (getCommentsForRepo)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/issues/comments')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.issues.getCommentsForRepo(
             {
-                user: "String",
-                repo: "String",
-                sort: "String",
-                direction: "String",
-                since: "Date",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/issues/events/:id (getEvent)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/issues/events/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.issues.getEvent(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/issues/:number/events (getEvents)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/issues/:number/events')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined" })
+            .reply();
         client.issues.getEvents(
             {
-                user: "String",
-                repo: "String",
-                number: "Number",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/issues/events (getEventsForRepo)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/issues/events')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.issues.getEventsForRepo(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /orgs/:org/issues (getForOrg)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/orgs/:org/issues')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.issues.getForOrg(
             {
-                filter: "String",
-                state: "String",
-                labels: "String",
-                sort: "String",
-                direction: "String",
-                since: "Date",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/issues (getForRepo)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/issues')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.issues.getForRepo(
             {
-                user: "String",
-                repo: "String",
-                milestone: "String",
-                state: "String",
-                assignee: "String",
-                creator: "String",
-                mentioned: "String",
-                labels: "String",
-                sort: "String",
-                direction: "String",
-                since: "Date",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /user/issues (getForUser)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/user/issues')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.issues.getForUser(
             {
-                filter: "String",
-                state: "String",
-                labels: "String",
-                sort: "String",
-                direction: "String",
-                since: "Date",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/issues/:number/labels (getIssueLabels)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/issues/:number/labels')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined" })
+            .reply();
         client.issues.getIssueLabels(
             {
-                user: "String",
-                repo: "String",
-                number: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/labels/:name (getLabel)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/labels/:name')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    name: "undefined" })
+            .reply();
         client.issues.getLabel(
             {
-                user: "String",
-                repo: "String",
-                name: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/labels (getLabels)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/labels')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.issues.getLabels(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/milestones/:number (getMilestone)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/milestones/:number')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined" })
+            .reply();
         client.issues.getMilestone(
             {
-                user: "String",
-                repo: "String",
-                number: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/milestones/:number/labels (getMilestoneLabels)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/milestones/:number/labels')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined" })
+            .reply();
         client.issues.getMilestoneLabels(
             {
-                user: "String",
-                repo: "String",
-                number: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/milestones (getMilestones)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/milestones')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.issues.getMilestones(
             {
-                user: "String",
-                repo: "String",
-                state: "String",
-                sort: "String",
-                direction: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/issues/:number/labels (removeAllLabels)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/issues/:number/labels')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined" })
+            .reply();
         client.issues.removeAllLabels(
             {
-                user: "String",
-                repo: "String",
-                number: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/issues/:number/labels/:name (removeLabel)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/issues/:number/labels/:name')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined",
+    name: "undefined" })
+            .reply();
         client.issues.removeLabel(
             {
-                user: "String",
-                repo: "String",
-                number: "Number",
-                name: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined",
+                name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PUT /repos/:user/:repo/issues/:number/labels (replaceAllLabels)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .put('/repos/:user/:repo/issues/:number/labels')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined",
+    body: "undefined" })
+            .reply();
         client.issues.replaceAllLabels(
             {
-                user: "String",
-                repo: "String",
-                number: "Number",
-                body: "Array"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined",
+                body: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /repos/:user/:repo/labels/:name (updateLabel)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo/labels/:name')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    name: "undefined",
+    color: "undefined" })
+            .reply();
         client.issues.updateLabel(
             {
-                user: "String",
-                repo: "String",
-                name: "String",
-                color: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                name: "undefined",
+                color: "undefined"
             }
         );
+        expected.done();
+        next();
     });
 
+
     it("should successfully execute PATCH /repos/:user/:repo/milestones/:number (updateMilestone)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo/milestones/:number')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    number: "undefined",
+    title: "undefined" })
+            .reply();
         client.issues.updateMilestone(
             {
-                user: "String",
-                repo: "String",
-                number: "Number",
-                title: "String",
-                state: "String",
-                description: "String",
-                due_on: "Date"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                number: "undefined",
+                title: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 });

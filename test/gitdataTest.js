@@ -9,13 +9,12 @@
 
 "use strict";
 
-var Assert = require("assert");
 var Client = require("./../lib/index");
-var testAuth = require("./../test_auth.json");
+var nock = require('nock')
 
 describe("[gitdata]", function() {
     var client;
-    var token = testAuth["token"];
+    var token = "my test token";
 
     beforeEach(function() {
         client = new Client();
@@ -26,230 +25,296 @@ describe("[gitdata]", function() {
     });
 
     it("should successfully execute POST /repos/:user/:repo/git/blobs (createBlob)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/git/blobs')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    content: "undefined",
+    encoding: "undefined" })
+            .reply();
         client.gitdata.createBlob(
             {
-                user: "String",
-                repo: "String",
-                content: "String",
-                encoding: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                content: "undefined",
+                encoding: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/git/commits (createCommit)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/git/commits')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    message: "undefined",
+    tree: "undefined",
+    parents: "undefined" })
+            .reply();
         client.gitdata.createCommit(
             {
-                user: "String",
-                repo: "String",
-                message: "String",
-                tree: "String",
-                parents: "Array",
-                author: "Json",
-                committer: "Json"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                message: "undefined",
+                tree: "undefined",
+                parents: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/git/refs (createReference)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/git/refs')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    ref: "undefined",
+    sha: "undefined" })
+            .reply();
         client.gitdata.createReference(
             {
-                user: "String",
-                repo: "String",
-                ref: "String",
-                sha: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                ref: "undefined",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/git/tags (createTag)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/git/tags')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    tag: "undefined",
+    message: "undefined",
+    object: "undefined",
+    type: "undefined",
+    tagger: "undefined" })
+            .reply();
         client.gitdata.createTag(
             {
-                user: "String",
-                repo: "String",
-                tag: "String",
-                message: "String",
-                object: "String",
-                type: "String",
-                tagger: "Json"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                tag: "undefined",
+                message: "undefined",
+                object: "undefined",
+                type: "undefined",
+                tagger: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/git/trees (createTree)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/git/trees')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    tree: "undefined" })
+            .reply();
         client.gitdata.createTree(
             {
-                user: "String",
-                repo: "String",
-                tree: "Json",
-                base_tree: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                tree: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/git/refs/:ref (deleteReference)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/git/refs/:ref')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    ref: "undefined" })
+            .reply();
         client.gitdata.deleteReference(
             {
-                user: "String",
-                repo: "String",
-                ref: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                ref: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/git/blobs/:sha (getBlob)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/git/blobs/:sha')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined" })
+            .reply();
         client.gitdata.getBlob(
             {
-                user: "String",
-                repo: "String",
-                sha: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/git/commits/:sha (getCommit)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/git/commits/:sha')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined" })
+            .reply();
         client.gitdata.getCommit(
             {
-                user: "String",
-                repo: "String",
-                sha: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/git/refs/:ref (getReference)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/git/refs/:ref')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    ref: "undefined" })
+            .reply();
         client.gitdata.getReference(
             {
-                user: "String",
-                repo: "String",
-                ref: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                ref: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/git/refs (getReferences)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/git/refs')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.gitdata.getReferences(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/git/tags/:sha (getTag)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/git/tags/:sha')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined" })
+            .reply();
         client.gitdata.getTag(
             {
-                user: "String",
-                repo: "String",
-                sha: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/git/refs/tags (getTags)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/git/refs/tags')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.gitdata.getTags(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/git/trees/:sha (getTree)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/git/trees/:sha')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined" })
+            .reply();
         client.gitdata.getTree(
             {
-                user: "String",
-                repo: "String",
-                sha: "String",
-                recursive: "Boolean"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
 
+
     it("should successfully execute PATCH /repos/:user/:repo/git/refs/:ref (updateReference)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo/git/refs/:ref')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    ref: "undefined",
+    sha: "undefined" })
+            .reply();
         client.gitdata.updateReference(
             {
-                user: "String",
-                repo: "String",
-                ref: "String",
-                sha: "String",
-                force: "Boolean"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                ref: "undefined",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 });

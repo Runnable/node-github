@@ -9,13 +9,12 @@
 
 "use strict";
 
-var Assert = require("assert");
 var Client = require("./../lib/index");
-var testAuth = require("./../test_auth.json");
+var nock = require('nock')
 
 describe("[repos]", function() {
     var client;
-    var token = testAuth["token"];
+    var token = "my test token";
 
     beforeEach(function() {
         client = new Client();
@@ -26,1299 +25,1540 @@ describe("[repos]", function() {
     });
 
     it("should successfully execute PUT /repos/:user/:repo/collaborators/:collabuser (addCollaborator)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .put('/repos/:user/:repo/collaborators/:collabuser')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    collabuser: "undefined" })
+            .reply();
         client.repos.addCollaborator(
             {
-                user: "String",
-                repo: "String",
-                collabuser: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                collabuser: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/collaborators/:collabuser (checkCollaborator)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/collaborators/:collabuser')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    collabuser: "undefined" })
+            .reply();
         client.repos.checkCollaborator(
             {
-                user: "String",
-                repo: "String",
-                collabuser: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                collabuser: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/compare/:base...:head (compareCommits)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/compare/:base...:head')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    base: "undefined",
+    head: "undefined" })
+            .reply();
         client.repos.compareCommits(
             {
-                user: "String",
-                repo: "String",
-                base: "String",
-                head: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                base: "undefined",
+                head: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /user/repos (create)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/user/repos')
+            .query({ access_token: token })
+            .query({ name: "undefined" })
+            .reply();
         client.repos.create(
             {
-                name: "String",
-                description: "String",
-                homepage: "String",
-                private: "Boolean",
-                has_issues: "Boolean",
-                has_wiki: "Boolean",
-                has_downloads: "Boolean",
-                auto_init: "Boolean",
-                gitignore_template: "String",
-                license_template: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/commits/:sha/comments (createCommitComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/commits/:sha/comments')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined",
+    body: "undefined" })
+            .reply();
         client.repos.createCommitComment(
             {
-                user: "String",
-                repo: "String",
-                sha: "String",
-                body: "String",
-                path: "String",
-                position: "Number",
-                line: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined",
+                body: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/deployments (createDeployment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/deployments')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    ref: "undefined",
+    task: "deploy" })
+            .reply();
         client.repos.createDeployment(
             {
-                user: "String",
-                repo: "String",
-                ref: "String",
-                task: "String",
-                auto_merge: "Boolean",
-                required_contexts: "Array",
-                payload: "String",
-                environment: "String",
-                description: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                ref: "undefined",
+                task: "deploy"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/deployments/:id/statuses (createDeploymentStatus)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/deployments/:id/statuses')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.createDeploymentStatus(
             {
-                user: "String",
-                repo: "String",
-                id: "String",
-                state: "String",
-                target_url: "String",
-                description: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PUT /repos/:user/:repo/contents/:path (createFile)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .put('/repos/:user/:repo/contents/:path')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    path: "undefined",
+    message: "undefined",
+    content: "undefined" })
+            .reply();
         client.repos.createFile(
             {
-                user: "String",
-                repo: "String",
-                path: "String",
-                message: "String",
-                content: "String",
-                branch: "String",
-                committer: "Json"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                path: "undefined",
+                message: "undefined",
+                content: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /orgs/:org/repos (createForOrg)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/orgs/:org/repos')
+            .query({ access_token: token })
+            .query({ org: "undefined",
+    name: "undefined" })
+            .reply();
         client.repos.createForOrg(
             {
-                org: "String",
-                name: "String",
-                description: "String",
-                homepage: "String",
-                private: "Boolean",
-                has_issues: "Boolean",
-                has_wiki: "Boolean",
-                has_downloads: "Boolean",
-                team_id: "Number",
-                auto_init: "Boolean",
-                gitignore_template: "String",
-                license_template: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                org: "undefined",
+                name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/hooks (createHook)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/hooks')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    name: "undefined",
+    config: "undefined" })
+            .reply();
         client.repos.createHook(
             {
-                user: "String",
-                repo: "String",
-                name: "String",
-                config: "Json",
-                events: "Array",
-                active: "Boolean"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                name: "undefined",
+                config: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/keys (createKey)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/keys')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    title: "undefined",
+    key: "undefined" })
+            .reply();
         client.repos.createKey(
             {
-                user: "String",
-                repo: "String",
-                title: "String",
-                key: "String",
-                read_only: "Boolean"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                title: "undefined",
+                key: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/releases (createRelease)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/releases')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    tag_name: "undefined" })
+            .reply();
         client.repos.createRelease(
             {
-                user: "String",
-                repo: "String",
-                tag_name: "String",
-                target_commitish: "String",
-                name: "String",
-                body: "String",
-                draft: "Boolean",
-                prerelease: "Boolean"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                tag_name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/statuses/:sha (createStatus)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/statuses/:sha')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined",
+    state: "undefined" })
+            .reply();
         client.repos.createStatus(
             {
-                user: "String",
-                repo: "String",
-                sha: "String",
-                state: "String",
-                target_url: "String",
-                description: "String",
-                context: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined",
+                state: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo (delete)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.delete(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/releases/assets/:id (deleteAsset)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/releases/assets/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.deleteAsset(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/comments/:id (deleteCommitComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/comments/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.deleteCommitComment(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/downloads/:id (deleteDownload)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/downloads/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.deleteDownload(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/contents/:path (deleteFile)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/contents/:path')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    path: "undefined",
+    message: "undefined",
+    sha: "undefined" })
+            .reply();
         client.repos.deleteFile(
             {
-                user: "String",
-                repo: "String",
-                path: "String",
-                message: "String",
-                sha: "String",
-                branch: "String",
-                committer: "Json"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                path: "undefined",
+                message: "undefined",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/hooks/:id (deleteHook)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/hooks/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.deleteHook(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/keys/:id (deleteKey)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/keys/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.deleteKey(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/releases/:id (deleteRelease)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/releases/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.deleteRelease(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /repos/:user/:repo (edit)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    name: "undefined" })
+            .reply();
         client.repos.edit(
             {
-                user: "String",
-                repo: "String",
-                name: "String",
-                description: "String",
-                homepage: "String",
-                private: "Boolean",
-                has_issues: "Boolean",
-                has_wiki: "Boolean",
-                has_downloads: "Boolean",
-                default_branch: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /repos/:user/:repo/releases/assets/:id (editAsset)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo/releases/assets/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined",
+    name: "undefined" })
+            .reply();
         client.repos.editAsset(
             {
-                user: "String",
-                repo: "String",
-                id: "String",
-                name: "String",
-                label: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined",
+                name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /repos/:user/:repo/hooks/:id (editHook)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo/hooks/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined",
+    name: "undefined",
+    config: "undefined" })
+            .reply();
         client.repos.editHook(
             {
-                user: "String",
-                repo: "String",
-                id: "String",
-                name: "String",
-                config: "Json",
-                events: "Array",
-                add_events: "Array",
-                remove_events: "Array",
-                active: "Boolean"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined",
+                name: "undefined",
+                config: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /repos/:user/:repo/releases/:id (editRelease)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo/releases/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined",
+    tag_name: "undefined" })
+            .reply();
         client.repos.editRelease(
             {
-                user: "String",
-                repo: "String",
-                id: "String",
-                tag_name: "String",
-                target_commitish: "String",
-                name: "String",
-                body: "String",
-                draft: "Boolean",
-                prerelease: "Boolean"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined",
+                tag_name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/forks (fork)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/forks')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.fork(
             {
-                user: "String",
-                repo: "String",
-                organization: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo (get)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.get(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /user/repos (getAll)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/user/repos')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.repos.getAll(
             {
-                visibility: "String",
-                affiliation: "String",
-                type: "String",
-                sort: "String",
-                direction: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/comments (getAllCommitComments)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/comments')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getAllCommitComments(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/:archive_format/:ref (getArchiveLink)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/:archive_format/:ref')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    archive_format: "tarball" })
+            .reply();
         client.repos.getArchiveLink(
             {
-                user: "String",
-                repo: "String",
-                archive_format: "String",
-                ref: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                archive_format: "tarball"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/releases/assets/:id (getAsset)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/releases/assets/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.getAsset(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/branches/:branch (getBranch)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/branches/:branch')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    branch: "undefined" })
+            .reply();
         client.repos.getBranch(
             {
-                user: "String",
-                repo: "String",
-                branch: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                branch: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/branches (getBranches)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/branches')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getBranches(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/collaborators (getCollaborators)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/collaborators')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getCollaborators(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/commits/:sha/status (getCombinedStatus)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/commits/:sha/status')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined" })
+            .reply();
         client.repos.getCombinedStatus(
             {
-                user: "String",
-                repo: "String",
-                sha: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/commits/:sha (getCommit)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/commits/:sha')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined" })
+            .reply();
         client.repos.getCommit(
             {
-                user: "String",
-                repo: "String",
-                sha: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/comments/:id (getCommitComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/comments/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.getCommitComment(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/commits/:sha/comments (getCommitComments)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/commits/:sha/comments')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined" })
+            .reply();
         client.repos.getCommitComments(
             {
-                user: "String",
-                repo: "String",
-                sha: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/commits (getCommits)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/commits')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getCommits(
             {
-                user: "String",
-                repo: "String",
-                sha: "String",
-                path: "String",
-                author: "String",
-                since: "Date",
-                until: "Date",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/contents/:path (getContent)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/contents/:path')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getContent(
             {
-                user: "String",
-                repo: "String",
-                path: "String",
-                ref: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/contributors (getContributors)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/contributors')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getContributors(
             {
-                user: "String",
-                repo: "String",
-                anon: "Boolean",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/deployments/:id/statuses (getDeploymentStatuses)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/deployments/:id/statuses')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.getDeploymentStatuses(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/deployments (getDeployments)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/deployments')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getDeployments(
             {
-                user: "String",
-                repo: "String",
-                sha: "String",
-                ref: "String",
-                task: "String",
-                environment: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/downloads/:id (getDownload)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/downloads/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.getDownload(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/downloads (getDownloads)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/downloads')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getDownloads(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /orgs/:org/repos (getForOrg)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/orgs/:org/repos')
+            .query({ access_token: token })
+            .query({ org: "undefined" })
+            .reply();
         client.repos.getForOrg(
             {
-                org: "String",
-                type: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                org: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /users/:user/repos (getForUser)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/users/:user/repos')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze" })
+            .reply();
         client.repos.getForUser(
             {
-                user: "String",
-                type: "String",
-                sort: "String",
-                direction: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/forks (getForks)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/forks')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getForks(
             {
-                user: "String",
-                repo: "String",
-                sort: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/hooks/:id (getHook)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/hooks/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.getHook(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/hooks (getHooks)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/hooks')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getHooks(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/keys/:id (getKey)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/keys/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.getKey(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/keys (getKeys)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/keys')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getKeys(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/languages (getLanguages)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/languages')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getLanguages(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/pages/builds/latest (getLatestPagesBuild)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/pages/builds/latest')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getLatestPagesBuild(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/releases/latest (getLatestRelease)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/releases/latest')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getLatestRelease(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/pages (getPages)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/pages')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getPages(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/pages/builds (getPagesBuilds)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/pages/builds')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getPagesBuilds(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repositories (getPublic)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repositories')
+            .query({ access_token: token })
+            .query({ org: "undefined" })
+            .reply();
         client.repos.getPublic(
             {
-                org: "String",
-                since: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                org: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/readme (getReadme)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/readme')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getReadme(
             {
-                user: "String",
-                repo: "String",
-                ref: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/releases/:id (getRelease)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/releases/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.getRelease(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/releases/tags/:tag (getReleaseByTag)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/releases/tags/:tag')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    tag: "undefined" })
+            .reply();
         client.repos.getReleaseByTag(
             {
-                user: "String",
-                repo: "String",
-                tag: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                tag: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/releases (getReleases)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/releases')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getReleases(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/stats/code_frequency (getStatsCodeFrequency)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/stats/code_frequency')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getStatsCodeFrequency(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/stats/commit_activity (getStatsCommitActivity)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/stats/commit_activity')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getStatsCommitActivity(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/stats/contributors (getStatsContributors)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/stats/contributors')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getStatsContributors(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/stats/participation (getStatsParticipation)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/stats/participation')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getStatsParticipation(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/stats/punch_card (getStatsPunchCard)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/stats/punch_card')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getStatsPunchCard(
             {
-                user: "String",
-                repo: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/commits/:sha/statuses (getStatuses)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/commits/:sha/statuses')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    sha: "undefined" })
+            .reply();
         client.repos.getStatuses(
             {
-                user: "String",
-                repo: "String",
-                sha: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/tags (getTags)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/tags')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getTags(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/teams (getTeams)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/teams')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github" })
+            .reply();
         client.repos.getTeams(
             {
-                user: "String",
-                repo: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repos/:user/:repo/releases/:id/assets (listAssets)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repos/:user/:repo/releases/:id/assets')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.listAssets(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/merges (merge)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/merges')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    base: "undefined",
+    head: "undefined" })
+            .reply();
         client.repos.merge(
             {
-                user: "String",
-                repo: "String",
-                base: "String",
-                head: "String",
-                commit_message: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                base: "undefined",
+                head: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /repositories/:id (one)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/repositories/:id')
+            .query({ access_token: token })
+            .query({ id: "undefined" })
+            .reply();
         client.repos.one(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/hooks/:id/pings (pingHook)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/hooks/:id/pings')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.pingHook(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /repos/:user/:repo/collaborators/:collabuser (removeCollaborator)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/repos/:user/:repo/collaborators/:collabuser')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    collabuser: "undefined" })
+            .reply();
         client.repos.removeCollaborator(
             {
-                user: "String",
-                repo: "String",
-                collabuser: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                collabuser: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /repos/:user/:repo/hooks/:id/test (testHook)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/hooks/:id/test')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined" })
+            .reply();
         client.repos.testHook(
             {
-                user: "String",
-                repo: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /repos/:user/:repo/comments/:id (updateCommitComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/repos/:user/:repo/comments/:id')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined",
+    body: "undefined" })
+            .reply();
         client.repos.updateCommitComment(
             {
-                user: "String",
-                repo: "String",
-                id: "String",
-                body: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined",
+                body: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PUT /repos/:user/:repo/contents/:path (updateFile)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .put('/repos/:user/:repo/contents/:path')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    path: "undefined",
+    message: "undefined",
+    content: "undefined",
+    sha: "undefined" })
+            .reply();
         client.repos.updateFile(
             {
-                user: "String",
-                repo: "String",
-                path: "String",
-                message: "String",
-                content: "String",
-                sha: "String",
-                branch: "String",
-                committer: "Json"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                path: "undefined",
+                message: "undefined",
+                content: "undefined",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
 
+
     it("should successfully execute POST /repos/:user/:repo/releases/:id/assets (uploadAsset)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/repos/:user/:repo/releases/:id/assets')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze",
+    repo: "node-github",
+    id: "undefined",
+    name: "undefined" })
+            .reply();
         client.repos.uploadAsset(
             {
-                user: "String",
-                repo: "String",
-                id: "String",
-                name: "String",
-                label: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze",
+                repo: "node-github",
+                id: "undefined",
+                name: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 });

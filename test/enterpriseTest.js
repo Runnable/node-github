@@ -9,13 +9,12 @@
 
 "use strict";
 
-var Assert = require("assert");
 var Client = require("./../lib/index");
-var testAuth = require("./../test_auth.json");
+var nock = require('nock')
 
 describe("[enterprise]", function() {
     var client;
-    var token = testAuth["token"];
+    var token = "my test token";
 
     beforeEach(function() {
         client = new Client();
@@ -26,93 +25,114 @@ describe("[enterprise]", function() {
     });
 
     it("should successfully execute POST /admin/organizations (createOrg)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/admin/organizations')
+            .query({ access_token: token })
+            .query({ login: "undefined",
+    admin: "undefined" })
+            .reply();
         client.enterprise.createOrg(
             {
-                login: "String",
-                admin: "String",
-                profile_name: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                login: "undefined",
+                admin: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /enterprise/settings/license (getLicense)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/enterprise/settings/license')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.enterprise.getLicense(
-            {},
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
-            }
+            {}
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /enterprise/stats/:type (stats)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/enterprise/stats/:type')
+            .query({ access_token: token })
+            .query({ type: "undefined" })
+            .reply();
         client.enterprise.stats(
             {
-                type: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                type: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /admin/ldap/teams/:team_id/sync (syncLdapForTeam)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/admin/ldap/teams/:team_id/sync')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.enterprise.syncLdapForTeam(
             {
-                team_id: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /admin/ldap/users/:user/sync (syncLdapForUser)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/admin/ldap/users/:user/sync')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze" })
+            .reply();
         client.enterprise.syncLdapForUser(
             {
-                user: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /admin/ldap/teams/:team_id/mapping (updateLdapForTeam)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/admin/ldap/teams/:team_id/mapping')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.enterprise.updateLdapForTeam(
             {
-                team_id: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
 
+
     it("should successfully execute PATCH /admin/ldap/users/:user/mapping (updateLdapForUser)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/admin/ldap/users/:user/mapping')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze" })
+            .reply();
         client.enterprise.updateLdapForUser(
             {
-                user: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze"
             }
         );
+        expected.done();
+        next();
     });
+
 });

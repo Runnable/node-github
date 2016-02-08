@@ -9,13 +9,12 @@
 
 "use strict";
 
-var Assert = require("assert");
 var Client = require("./../lib/index");
-var testAuth = require("./../test_auth.json");
+var nock = require('nock')
 
 describe("[gists]", function() {
     var client;
-    var token = testAuth["token"];
+    var token = "my test token";
 
     beforeEach(function() {
         client = new Client();
@@ -26,279 +25,338 @@ describe("[gists]", function() {
     });
 
     it("should successfully execute GET /gists/:id/star (checkStar)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists/:id/star')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.checkStar(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /gists (create)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/gists')
+            .query({ access_token: token })
+            .query({ files: "undefined",
+    public: "undefined" })
+            .reply();
         client.gists.create(
             {
-                files: "Json",
-                description: "String",
-                public: "Boolean"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                files: "undefined",
+                public: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /gists/:gist_id/comments (createComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/gists/:gist_id/comments')
+            .query({ access_token: token })
+            .query({ gist_id: "undefined",
+    body: "undefined" })
+            .reply();
         client.gists.createComment(
             {
-                gist_id: "String",
-                body: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                gist_id: "undefined",
+                body: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /gists/:id (delete)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/gists/:id')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.delete(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /gists/:gist_id/comments/:id (deleteComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/gists/:gist_id/comments/:id')
+            .query({ access_token: token })
+            .query({ gist_id: "undefined",
+    id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.deleteComment(
             {
-                gist_id: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                gist_id: "undefined",
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /gists/:id (edit)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/gists/:id')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2",
+    files: "undefined" })
+            .reply();
         client.gists.edit(
             {
-                id: "String",
-                description: "String",
-                files: "Json"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2",
+                files: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PATCH /gists/:gist_id/comments/:id (editComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/gists/:gist_id/comments/:id')
+            .query({ access_token: token })
+            .query({ gist_id: "undefined",
+    id: "00ccfb395ec8410daec2",
+    body: "undefined" })
+            .reply();
         client.gists.editComment(
             {
-                gist_id: "String",
-                id: "String",
-                body: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                gist_id: "undefined",
+                id: "00ccfb395ec8410daec2",
+                body: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute POST /gists/:id/forks (fork)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/gists/:id/forks')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.fork(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gists/:id (get)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists/:id')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.get(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gists (getAll)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.gists.getAll(
             {
-                page: "Number",
-                per_page: "Number",
-                since: "Date"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gists/:gist_id/comments/:id (getComment)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists/:gist_id/comments/:id')
+            .query({ access_token: token })
+            .query({ gist_id: "undefined",
+    id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.getComment(
             {
-                gist_id: "String",
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                gist_id: "undefined",
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gists/:gist_id/comments (getComments)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists/:gist_id/comments')
+            .query({ access_token: token })
+            .query({ gist_id: "undefined" })
+            .reply();
         client.gists.getComments(
             {
-                gist_id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                gist_id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gists/:id/commits (getCommits)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists/:id/commits')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.getCommits(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /users/:user/gists (getForUser)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/users/:user/gists')
+            .query({ access_token: token })
+            .query({ user: "kaizensoze" })
+            .reply();
         client.gists.getForUser(
             {
-                user: "String",
-                page: "Number",
-                per_page: "Number",
-                since: "Date"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                user: "kaizensoze"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gists/:id/forks (getForks)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists/:id/forks')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.getForks(
             {
-                id: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gists/public (getPublic)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists/public')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.gists.getPublic(
             {
-                since: "Date"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gists/:id/:sha (getRevision)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists/:id/:sha')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2",
+    sha: "undefined" })
+            .reply();
         client.gists.getRevision(
             {
-                id: "String",
-                sha: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2",
+                sha: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /gists/starred (getStarred)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/gists/starred')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.gists.getStarred(
             {
-                since: "Date"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute PUT /gists/:id/star (star)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .put('/gists/:id/star')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.star(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
 
+
     it("should successfully execute DELETE /gists/:id/star (unstar)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/gists/:id/star')
+            .query({ access_token: token })
+            .query({ id: "00ccfb395ec8410daec2" })
+            .reply();
         client.gists.unstar(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "00ccfb395ec8410daec2"
             }
         );
+        expected.done();
+        next();
     });
+
 });

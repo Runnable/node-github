@@ -9,13 +9,12 @@
 
 "use strict";
 
-var Assert = require("assert");
 var Client = require("./../lib/index");
-var testAuth = require("./../test_auth.json");
+var nock = require('nock')
 
 describe("[search]", function() {
     var client;
-    var token = testAuth["token"];
+    var token = "my test token";
 
     beforeEach(function() {
         client = new Client();
@@ -26,83 +25,66 @@ describe("[search]", function() {
     });
 
     it("should successfully execute GET /search/code (code)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/search/code')
+            .query({ access_token: token })
+            .query({ q: "bazinga" })
+            .reply();
         client.search.code(
             {
-                q: "String",
-                sort: "String",
-                order: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                q: "bazinga"
             }
         );
+        expected.done();
+        next();
     });
 
-    it("should successfully execute GET /legacy/user/email/:email (email)",  function(next) {
-        client.search.email(
-            {
-                email: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
-            }
-        );
-    });
 
     it("should successfully execute GET /search/issues (issues)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/search/issues')
+            .query({ access_token: token })
+            .query({ q: "bazinga" })
+            .reply();
         client.search.issues(
             {
-                q: "String",
-                sort: "String",
-                order: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                q: "bazinga"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /search/repositories (repos)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/search/repositories')
+            .query({ access_token: token })
+            .query({ q: "bazinga" })
+            .reply();
         client.search.repos(
             {
-                q: "String",
-                sort: "String",
-                order: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                q: "bazinga"
             }
         );
+        expected.done();
+        next();
     });
 
+
     it("should successfully execute GET /search/users (users)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/search/users')
+            .query({ access_token: token })
+            .query({ q: "bazinga" })
+            .reply();
         client.search.users(
             {
-                q: "String",
-                sort: "String",
-                order: "String",
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                q: "bazinga"
             }
         );
+        expected.done();
+        next();
     });
+
 });

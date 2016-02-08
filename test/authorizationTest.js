@@ -9,13 +9,12 @@
 
 "use strict";
 
-var Assert = require("assert");
 var Client = require("./../lib/index");
-var testAuth = require("./../test_auth.json");
+var nock = require('nock')
 
 describe("[authorization]", function() {
     var client;
-    var token = testAuth["token"];
+    var token = "my test token";
 
     beforeEach(function() {
         client = new Client();
@@ -26,75 +25,82 @@ describe("[authorization]", function() {
     });
 
     it("should successfully execute POST /authorizations (create)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .post('/authorizations')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.authorization.create(
             {
-                scopes: "Array",
-                note: "String",
-                note_url: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute DELETE /authorizations/:id (delete)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .delete('/authorizations/:id')
+            .query({ access_token: token })
+            .query({ id: "undefined" })
+            .reply();
         client.authorization.delete(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /authorizations/:id (get)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/authorizations/:id')
+            .query({ access_token: token })
+            .query({ id: "undefined" })
+            .reply();
         client.authorization.get(
             {
-                id: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 
     it("should successfully execute GET /authorizations (getAll)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .get('/authorizations')
+            .query({ access_token: token })
+            .query({  })
+            .reply();
         client.authorization.getAll(
             {
-                page: "Number",
-                per_page: "Number"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+
             }
         );
+        expected.done();
+        next();
     });
 
+
     it("should successfully execute PATCH /authorizations/:id (update)",  function(next) {
+        var expected = nock('https://api.github.com')
+            .patch('/authorizations/:id')
+            .query({ access_token: token })
+            .query({ id: "undefined" })
+            .reply();
         client.authorization.update(
             {
-                id: "String",
-                scopes: "Array",
-                add_scopes: "Array",
-                remove_scopes: "Array",
-                note: "String",
-                note_url: "String"
-            },
-            function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
-                next();
+                id: "undefined"
             }
         );
+        expected.done();
+        next();
     });
+
 });
